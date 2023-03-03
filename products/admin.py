@@ -14,7 +14,7 @@ class SubCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Type)
 class TypeAdmin(admin.ModelAdmin):
-    list_display = ('subcategory')
+    list_display = ('subcategory',)
 
 
 @admin.register(Brand)
@@ -24,4 +24,4 @@ class BrandAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('image','type', 'brand', 'name', 'price', 'stock', 'discound', 'status', 'details', 'features', 'specification')
+    list_display = ('image','type', 'brand', 'name', 'price', 'stock', 'discount', 'status', 'details', 'features', 'specification')

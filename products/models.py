@@ -4,17 +4,36 @@ class Category(models.Model):
     title = models.CharField(max_length=255)
     caption = models.CharField(max_length=255)
 
+    class Meta: 
+        verbose_name = '1. Category'
+
+
+
 class SubCategory(models.Model):
-    Category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     caption = models.CharField(max_length=255)
 
+    class Meta: 
+        verbose_name = '2. Subcategory'
+
 class Type(models.Model):
     subcategory= models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    caption = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f'{self.subcategory.category}-{self.subcategory}-{self.title}'
+
+    class Meta: 
+        verbose_name = '3. Type'
 
 class Brand(models.Model):
      title = models.CharField(max_length=255)
      caption = models.CharField(max_length=255)
+
+     class Meta: 
+        verbose_name = '4. Brand'
 
 class Product(models.Model):
     image=models.ImageField(upload_to='products/')
@@ -28,3 +47,6 @@ class Product(models.Model):
     details = models.TextField(null=True, blank=True)
     features = models.TextField(null=True, blank = True)
     specification = models.TextField(null=True, blank= True)
+
+    class Meta: 
+        verbose_name = '5. Product'
