@@ -2,40 +2,30 @@
 <section class="row" id="slider">
   <div id="carouselExampleCaptions" class="carousel slide">
     <div class="carousel-indicators">
+      {% for s in sliders %}
       <button
         type="button"
         data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="0"
+        data-bs-slide-to="{{ forloop.counter0 }} "
         {% if forloop.counter0 == 0 %}
         class="active"
-        {% endif %} 
         aria-current="true"
-        aria-label="Slide 1"
+        {% endif %} 
+        aria-label="Slide {{forloop.counter }}"
       ></button>
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="1{{ forloop.counter0 }}"
-        aria-label="Slide 2"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="2"
-        aria-label="Slide 3"
-      ></button>
+      {% endfor %}
     </div>
     <div class="carousel-inner">
       {% for s in sliders %}
       <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %} ">
         <img
-          src="{% static 'images/slider1.jpg' %}"
+          src="/media/{{ s.image }}"
           class="d-block w-100"
           alt="..."
         />
         <div class="carousel-caption d-none d-md-block">
-          <h5>First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
+          <h5>{{s.title}}</h5>
+          <p>{{s.details}}</p>
         </div>
       </div>
       {% endfor %}
@@ -176,8 +166,8 @@
         </a>
       </div>
     </div>
-    {% endfor %}
   </div>
+  {% endfor %}
 </section>
 
 {% endblock %}

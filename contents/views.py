@@ -5,14 +5,18 @@ from contents.models import Content
 
 def show_home(request):
     latest_products = Product.objects.order_by('-id')[:2]
-    sliders = Content.objects.filter(section_id=4)
-    # return HttpResponse(latest_products)
+    sliders = Content.objects.filter(section__title = 'slider')
+    # return HttpResponse(sliders)
     return render(request,'index.html', {'sliders' : sliders, 'latest': latest_products})
 
-def show_intro(request):
-    return HttpResponse("This in intro")
+
+def show_about(request):
+    about = Content.objects.filter(section__title = 'About')
+    return HttpResponse(about)
+
 
 def show_contacts(request):
+    about = Content.objects.filter(section_id=1)
     return HttpResponse("This in contacts")
 
 def show_policies(request):
