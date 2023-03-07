@@ -2,11 +2,12 @@
 {% load static %}
 {% block content %}
 
-    <section class="row" id="latest">
+    {% for dt in data %}
+    <section class="row">
         <div class="col-12">
-            <h2 class="text-center m-5">Our Products</h2>
+            <h2 class="text-center m-5">{{dt.title}}</h2>
         </div>
-        <div class="text"></div>
-
+        <div class="text">{{ dt.details|safe  }}</div>
     </section>
+    {% endfor %}
 {% endblock %}

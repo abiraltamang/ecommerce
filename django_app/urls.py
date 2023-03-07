@@ -21,8 +21,9 @@ from . import settings
 
 urlpatterns = [
     path('', content_views.show_home ),
+    path('ck_uploads/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
-    path('contents/', include('contents.urls')),
+    path('about/', include('contents.urls')),
     path('products/', include('products.urls') ),
 ]
 
