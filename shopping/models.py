@@ -1,6 +1,6 @@
 from django.db import models
 from products.models import Product
-from django.contrib.auth.models import User
+from accounts.models import User
 
 
 class Wishlist(models.Model):
