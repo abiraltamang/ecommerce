@@ -3,7 +3,9 @@ from django.http import HttpResponse
 
 
 def login(request):
-    return  HttpResponse("Hello")
+    if request.method == 'POST':
+        return HttpResponse("Hello i am login")
+    return HttpResponse('Invalid Access')
 
 
 def register(request):

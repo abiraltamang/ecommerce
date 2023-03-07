@@ -141,6 +141,7 @@
               </div>
               <div class="modal-body">
                 <form action="/accounts/login" method="post" >
+                  {% csrf_token %}
                   <div class="mb-3">
                     <label for="">Username</label>
                     <input type="text" class="form-control" name="username">
