@@ -16,7 +16,6 @@ def show_about(request):
     about = Content.objects.filter(section__title = 'About')
     return HttpResponse(about)
 
-
 def show_contacts(request):
     about = Content.objects.filter(section_id=1)
     return HttpResponse("This in contacts")

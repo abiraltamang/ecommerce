@@ -20,7 +20,7 @@
       <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %} ">
         <img
           src="/media/{{ s.image }}"
-          class="d-block w-100"
+          class="d-block"
           alt="..."
         />
         <div class="carousel-caption d-none d-md-block">
@@ -41,16 +41,20 @@
   </div>
 </section>
 
-<section class="row" id="latest">
-  <h2 class="text-center m-4">Latest Products</h2>
+<section class="row mt-5" id="latest">
+  <h2 class="text-center my-3">Latest Products</h2>
+  <p class="text-center px-5 mb-5"> Welcome to our latest products page, where we showcase the newest and most exciting additions to our online store. We're always on the lookout for the latest trends, innovations, and customer demands to bring you the best shopping experience possible. </p>
+
   {% for p in latest %}
   <div class="col-lg-3 col-md-4">
     <div class="card">
+        <a href="/products/details/{{p.id}}">
       <img
         src="/media/{{p.image}}"
         class="card-img-top"
         alt="..."
       />
+    </a>
       <div class="card-body">
         <h5 class="card-title">{{p.name}}</h5>
         <p class="card-text">

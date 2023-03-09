@@ -52,7 +52,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/')
     type = models.ForeignKey(Type, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=50)
     price = models.FloatField()
     stock = models.IntegerField()
     discount = models.FloatField(default=0)

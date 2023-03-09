@@ -10,6 +10,5 @@ def show_products(request):
 
 def show_product_details(request, id):
     products = Product.objects.filter(id=id)
-    product = Product.objects.get(id=id)
-    # return HttpResponse(products[0].price)
-    return HttpResponse(product.price)
+    return render(request, 'detail.html', {"products": products})
+
