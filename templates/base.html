@@ -44,29 +44,13 @@
                     >Home</a
                   >
                 </li>
+
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
+                  <a class="nav-link" href="#">About us</a>
                 </li>
-                <li class="nav-item dropdown">
-                  <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Dropdown
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </li>
-                  </ul>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Contact</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -77,9 +61,35 @@
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    User
+                    {% if user.is_authenticated %} {{ request.user }} {% else %}
+                    User {% endif %}
                   </a>
                   <ul class="dropdown-menu">
+                    {% if user.is_authenticated %}
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        href="#"
+                        data-bs-toggle="modal"
+                        data-bs-target="#loginModal"
+                        >WishList</a
+                      >
+                      <a
+                        class="dropdown-item"
+                        href="#"
+                        data-bs-toggle="modal"
+                        data-bs-target="#loginModal"
+                        >Cart</a
+                      >
+                      <a
+                        class="dropdown-item"
+                        href="#"
+                        data-bs-toggle="modal"
+                        data-bs-target="#loginModal"
+                        >Logout</a
+                      >
+                    </li>
+                    {% else %}
                     <li>
                       <a
                         class="dropdown-item"
@@ -90,16 +100,18 @@
                       >
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#"
-                      data-bs-toggle="modal"
-                      data-bs-target="#registerModal">Register</a>
+                      <a
+                        class="dropdown-item"
+                        href="#"
+                        data-bs-toggle="modal"
+                        data-bs-target="#registerModal"
+                        >Register</a
+                      >
                     </li>
+                    {% endif %}
                   </ul>
                 </li>
 
-                <li class="nav-item">
-                  <a class="nav-link disabled">Disabled</a>
-                </li>
               </ul>
               <form class="d-flex" role="search">
                 <input
@@ -117,111 +129,113 @@
         </nav>
       </header>
 
-
-        <!-- Login Modal -->
-        <div
-          class="modal fade"
-          id="loginModal"
-          tabindex="-1"
-          aria-labelledby="loginModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="loginModalLabel">
-                  User Login
-                </h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <form action="/accounts/login" method="post" >
-                  {% csrf_token %}
-                  <div class="mb-3">
-                    <label for="">Username</label>
-                    <input type="text" class="form-control" name="username">
-                  </div>
-                  <div class="mb-3">
-                    <label for="">Password</label>
-                    <input type="text" class="form-control" name="password">
-                  </div>
-                  <div class="mb-3">
-                    <input type="submit" class="btn btn-primary" value="Login">
-
-                  </div>
-                </form>
-              </div>
-              
+      {% if not user.is_authenticated %}
+      <!-- Login Modal -->
+      <div
+        class="modal fade"
+        id="loginModal"
+        tabindex="-1"
+        aria-labelledby="loginModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="loginModalLabel">User Login</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form action="/accounts/login" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="">Username</label>
+                  <input type="text" class="form-control" name="un" />
+                </div>
+                <div class="mb-3">
+                  <label for="">Password</label>
+                  <input type="password" class="form-control" name="pw" />
+                </div>
+                <div class="mb-3">
+                  <input type="submit" class="btn btn-primary" value="Login" />
+                </div>
+              </form>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Register Modal -->
-        <div
-          class="modal fade"
-          id="registerModal"
-          tabindex="-1"
-          aria-labelledby="registerModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="registerModalLabel">
-                  User Registration
-                </h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <form action="/accounts/register" method="post">
-                  {% csrf_token  %}
-                  <div class="mb-3">
-                    <label for="">First Name</label>
-                    <input type="text" class="form-control" name="fn">
-                  </div>
-                  <div class="mb-3">
-                    <label for="">Last Name</label>
-                    <input type="text" class="form-control" name="ln">
-                  </div>
-                  <div class="mb-3">
-                    <label for="">Email</label>
-                    <input type="text" class="form-control" name="email">
-                  </div>
-                  <div class="mb-3">
-                    <label for="">Mobile</label>
-                    <input type="text" class="form-control" name="mobile">
-                  </div>
-                  <div class="mb-3">
-                    <label for="">Username</label>
-                    <input type="text" class="form-control" name="username">
-                  </div>
-                  <div class="mb-3">
-                    <label for="">Password</label>
-                    <input type="text" class="form-control" name="password">
-                  </div>
-                  <div class="mb-3">
-                    <input type="submit" class="btn btn-primary " value="Register">
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-               
-              </div>
+      <!-- Register Modal -->
+      <div
+        class="modal fade"
+        id="registerModal"
+        tabindex="-1"
+        aria-labelledby="registerModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="registerModalLabel">
+                User Registration
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
+            <div class="modal-body">
+              <form action="/accounts/register" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="">First Name</label>
+                  <input type="text" class="form-control" name="fn" />
+                </div>
+                <div class="mb-3">
+                  <label for="">Last Name</label>
+                  <input type="text" class="form-control" name="ln" />
+                </div>
+                <div class="mb-3">
+                  <label for="">Email</label>
+                  <input type="text" class="form-control" name="em" />
+                </div>
+                <div class="mb-3">
+                  <label for="">Mobile</label>
+                  <input type="text" class="form-control" name="mb" />
+                </div>
+                <div class="mb-3">
+                  <label for="">Address</label>
+                  <input type="text" class="form-control" name="ad" />
+                </div>
+                <div class="mb-3">
+                  <label for="">Username</label>
+                  <input type="text" class="form-control" name="un" />
+                </div>
+                <div class="mb-3">
+                  <label for="">Password</label>
+                  <input type="text" class="form-control" name="pw" />
+                </div>
+                <div class="mb-3">
+                  <input
+                    type="submit"
+                    class="btn btn-primary"
+                    value="Register"
+                  />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer"></div>
           </div>
         </div>
+      </div>
 
-      {% block content %} {% endblock %}
+      {% endif %} {% block content %} {% endblock %}
       <footer class="row bg-[#2e2e54]">
         <div class="container">
           <div class="footer">

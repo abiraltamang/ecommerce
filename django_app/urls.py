@@ -20,7 +20,7 @@ from contents import views as content_views
 from . import settings
 
 urlpatterns = [
-    path('', content_views.show_home ),
+    path('', content_views.show_home , name='home' ),
     path('ck_uploads/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
     path('about/', include('contents.urls')),
