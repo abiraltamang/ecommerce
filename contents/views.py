@@ -4,7 +4,7 @@ from products.models import Product
 from contents.models import Content
 
 def show_home(request):
-    latest_products = Product.objects.order_by('-id')[:2]
+    latest_products = Product.objects.all()
     sliders = Content.objects.filter(section__title = 'slider')
     return render(request,'index.html', {'sliders' : sliders, 'latest': latest_products})
 
@@ -22,5 +22,6 @@ def show_contacts(request):
     return HttpResponse("This in contacts")
 
 def show_policies(request):
-    return HttpResponse("This in policies")
+    policy = Content.objects.filter(section__title = 'Policy')
+    return HttpResponse(policy)
 

@@ -49,7 +49,7 @@ class Brand(models.Model):
         verbose_name = '4. Brand'
 
 class Product(models.Model):
-    image=models.ImageField(upload_to='products/')
+    image = models.ImageField(upload_to='products/')
     type = models.ForeignKey(Type, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     name = models.CharField(max_length=25)

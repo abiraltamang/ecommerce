@@ -16,15 +16,24 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
     />
-    <title>Sultan Restaurant</title>
+    <title>Ecommerce website</title>
   </head>
   <body>
     <div class="container">
+
+      {% if messages %}
+      <div class="row">
+        {% for m in messages %}
+          <div class="alert {% if m.tags == 'error' %} alert-danger {% else %} alert-{{m.tags}} {% endif %} text-left ">{{ m }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
       <header class="row">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
           <div class="container-fluid">
             <a class="navbar-brand" href="/">
-              <img src="{% static 'images/logo.png' %}" id="logo" alt="" />
+              <img src="{% static 'images/logo1.png' %}" id="logo" alt="" style="width: 70px; height: 70px;" />
             </a>
             <button
               class="navbar-toggler"
@@ -40,13 +49,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#"
+                  <a class="nav-link active" aria-current="page" href="/"
                     >Home</a
                   >
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" href="#">About us</a>
+                  <a class="nav-link" href="{% url 'product_show'%}">Products</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/about/content/About">About us</a>
                 </li>
 
                 <li class="nav-item">
@@ -70,22 +82,20 @@
                       <a
                         class="dropdown-item"
                         href="#"
-                        data-bs-toggle="modal"
-                        data-bs-target="#loginModal"
                         >WishList</a
                       >
+                    </li>
+                    <li>
                       <a
                         class="dropdown-item"
-                        href="#"
-                        data-bs-toggle="modal"
-                        data-bs-target="#loginModal"
+                        href="#""
                         >Cart</a
                       >
+                    </li>
+                    <li>
                       <a
                         class="dropdown-item"
-                        href="#"
-                        data-bs-toggle="modal"
-                        data-bs-target="#loginModal"
+                        href="{% url 'logout' %}"
                         >Logout</a
                       >
                     </li>
@@ -111,7 +121,6 @@
                     {% endif %}
                   </ul>
                 </li>
-
               </ul>
               <form class="d-flex" role="search">
                 <input
@@ -120,7 +129,7 @@
                   placeholder="Search"
                   aria-label="Search"
                 />
-                <button class="btn btn-outline-success" type="submit">
+                <button class="btn btn-outline-primary" type="submit">
                   Search
                 </button>
               </form>
@@ -150,7 +159,7 @@
               ></button>
             </div>
             <div class="modal-body">
-              <form action="/accounts/login" method="post">
+              <form action="{% url 'login' %}" method="post">
                 {% csrf_token %}
                 <div class="mb-3">
                   <label for="">Username</label>
@@ -191,7 +200,7 @@
               ></button>
             </div>
             <div class="modal-body">
-              <form action="/accounts/register" method="post">
+              <form action="{% url 'register' %}" method="post">
                 {% csrf_token %}
                 <div class="mb-3">
                   <label for="">First Name</label>
@@ -236,25 +245,33 @@
       </div>
 
       {% endif %} {% block content %} {% endblock %}
-      <footer class="row bg-[#2e2e54]">
-        <div class="container">
-          <div class="footer">
-            <div class="container-fluid bg-white py-5 my-4">
-              <div>
-                <img src="{%static 'images/logo.png' %}" id="logo" alt="" />
-              </div>
-              <div>
-                <h2>Quick links</h2>
-                <ul>
-                  <li><a href="/about/content/About">About</a></li>
-                  <li><a href="/about/content/Contact">Contact</a></li>
-                  <li><a href="/about/content/Policy">Policy</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
+
+      <footer class="row  my-5 py-5">
+        <div class="col-md-4">
+          <img src="{%static 'images/logo1.png' %}" id="logo" alt="" style="width: 100px; height: 100px;" />
+          <p class="text-dark">All Right Reserved &copy; CATPIE E-Shop.</p>
+        </div>
+        
+        <div class="col-md-4">
+          <h3 class="text-dark">Quick Links</h3>
+
+          <ul style="list-style: none; padding-left: 0;">
+            <li><a class="text-dark" href="/about/content/About">About</a></li>
+            <li><a class="text-dark" href="/about/content/Policy">Policies</a></li>
+            <li><a class="text-dark" href="/about/content/Contacts">Contacts</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-4">
+          <h4 class="text-light">Subscribe Us:</h4>
+          <form action="">
+            <input type="email" class="form" name="email" 
+              placeholder="Your Email">
+            <input type="submit" class="btn btn-outline-primary" value="Subscribe">
+          </form>
         </div>
       </footer>
+
     </div>
 
     <script

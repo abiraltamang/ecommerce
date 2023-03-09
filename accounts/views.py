@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from accounts.models import User
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth.hashers import make_password
 
 
@@ -14,9 +14,12 @@ def login(request):
         
         if user is not None:
             auth.login(request, user)
+            messages.success(request, 'You are logged in')
             return redirect('home')
         else:
+            messages.error(request, 'Wrong credentials' )
             return HttpResponse('Wrong credentials')   
+            # return redirect('home')
 
 
 def register(request):
@@ -38,4 +41,14 @@ def register(request):
     return HttpResponse('Invalid Access')
 
 
-    
+def logout(request):
+    auth.logout(request)
+    messages.warning(request, 'You are logged out! ')
+    return redirect('home')
+
+
+def update_profile():
+    pass
+
+def change_password():
+    pass
