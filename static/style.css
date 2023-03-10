@@ -1,0 +1,16 @@
+#logo{
+    width: 120px;
+    height: 60px;
+}
+
+#slider .carousel-item img{
+    height: 600px;
+}
+
+#slider .carousel-caption{
+    background: rgba(36,155,246,0.7) ;
+}
+
+#latest .card img{
+    height: 18rem;
+}

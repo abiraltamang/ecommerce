@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-12 table-responsive">
+        <h3 class="my-3 mb-5 text-center">Cart list items</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>S.N</th>
+                    <th>Products</th>
+                    <th>Name</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Update</th>
+                    <th>Remove  </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in cart %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>
+                        <a href="{% url 'product_detail'  id=c.product.id %}">
+                            <img src="/media/{{c.product.image}}" alt="cart image" style="width: 100px; height: 100px;">
+                        </a>
+                    </td>
+                    <td>{{c.product.name}}</td>
+                    <td><input type="number" class="form-control" style="width:80px" value="{{c.qty}}"></td>
+                    <td>{{c.product.price}}</td>
+                    <td><a href="#" class="btn btn-secondary"><i class="bi bi-cart"></i></a></td>
+                    <td><a href="#" class="btn btn-danger"><i class="bi bi-trash"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

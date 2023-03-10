@@ -37,7 +37,8 @@ class Order(models.Model):
                                 ('Cancelled','Cancelled'),
                                     ], default= ' Requested')
 
-
+    def __str__(self):
+        return self.product.name
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -51,6 +52,4 @@ class Review(models.Model):
     review = models.CharField(max_length=255, null=True, blank=True)
     image = models.ImageField(upload_to='reviews', null=True, blank=True)
     rating = models.IntegerField()
-
-
 

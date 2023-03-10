@@ -20,8 +20,9 @@
       <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %} ">
         <img
           src="/media/{{ s.image }}"
-          class="d-block"
+          class="d-block "
           alt="..."
+          style="width: 100%; height: 600px;"
         />
         <div class="carousel-caption d-none d-md-block">
           <h5>{{s.title}}</h5>
@@ -60,7 +61,7 @@
         <p class="card-text">
          Nrs. {{p.price}}
         </p>
-        <a href="#" class="btn btn-primary">
+        <a href="{% url 'ac' pid=p.id qty=1 %}" class="btn btn-primary">
           <i class="bi bi-cart"></i>
         </a>
         <a href="{% url 'aw' pid=p.id %}" class="btn btn-danger">

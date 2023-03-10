@@ -1,11 +1,14 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block content %}
-<div class="row">
-  <section class="row" id="latest">
-    <h2 class="text-center m-4">Our products</h2>
+<div class="row mt-t">
+  <div class="col-md-3">
+    {% include 'sidebar.html' %}
+  </div>
+  <section class="row col-md-9" id="latest">
+    <h2 class="text-center m-5">Our products</h2>
     {% for p in products %}
-    <div class="col-lg-3 col-md-4">
+    <div class="col-lg-4 col-md-3">
       <div class="card">
         <a href="/products/details/{{p.id}}">
           <img src="/media/{{p.image}}" class="card-img-top" alt="..." />
