@@ -18,6 +18,7 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from contents import views as content_views
 from . import settings
+from paypal.standard.ipn import urls as paypal_urls
 
 urlpatterns = [
     path('', content_views.show_home , name='home' ),
@@ -27,6 +28,7 @@ urlpatterns = [
     path('products/', include('products.urls') ),
     path('accounts/', include('accounts.urls') ),
     path('shopping/', include('shopping.urls') ),
+    path('paypal/', include(paypal_urls)),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

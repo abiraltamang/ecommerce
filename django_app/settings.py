@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -47,7 +48,8 @@ INSTALLED_APPS = [
     'accounts',
 
     'ckeditor', 
-    'ckeditor_uploader'
+    'ckeditor_uploader',
+    'paypal.standard.ipn'
 ]
 
 MIDDLEWARE = [
@@ -96,10 +98,6 @@ DATABASES = {
         'PORT': 3306
 
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
 }
 
 
@@ -136,6 +134,8 @@ USE_L10N = True
 USE_TZ = True
 
 
+LOGIN_URL = 'home'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -151,3 +151,7 @@ CKEDITOR_UPLOAD_PATH = 'ckuploads/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+PAYPAL_TEST = True
+PAYPAL_CLIENT_ID = 'AfixfZKzeKzNZo1ed2JX0DcfjU2gz4qkUlArD5AxKvCOdXsfDsSGw3NO3YmRsDbTfDP3pu6aI6G2wQ8J'
+PAYPAL_CLIENT_SECRET = 'EM2iYg6MNPtSLsinF1_UgQ1cy8Ld8rvBEgMCU3IUJOW3fzFitEL24N-z1ruBveRVyc2Ffi3Pn02gyz4P'

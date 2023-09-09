@@ -1,16 +1,13 @@
-{% extends 'base.html' %} 
-{% load static %} 
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <div class="row mt-t">
-  <div class="col-md-3">
-    {% include 'sidebar.html' %}
-  </div>
+  <div class="col-md-3">{% include 'sidebar.html' %}</div>
   <section class="row col-md-9" id="latest">
     <h2 class="text-center m-5">Our products</h2>
     {% for p in products %}
     <div class="col-lg-4 col-md-3">
-      <div class="card">
+      <div class="card" style="padding: 20px">
         <a href="/products/details/{{p.id}}">
+          <div class="img"></div>
           <img src="/media/{{p.image}}" class="card-img-top" alt="..." />
         </a>
         <div class="card-body">
@@ -29,4 +26,15 @@
   </section>
 </div>
 
-{% endblock %}
+{% block meta_tags %}
+<meta
+  name="description"
+  content="Welcome to our camera ecommerce site offering a wide range of cameras, lenses, and accessories. Find the perfect gear for your photography needs."
+/>
+<meta
+  name="keywords"
+  content="camera, cameras, photography, ecommerce, online store, lenses, accessories"
+/>
+<meta name="author" content="Your Ecommerce Site" />
+<title>Our Products - Your Ecommerce Site</title>
+{% endblock %} {% endblock %}

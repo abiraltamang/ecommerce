@@ -1,64 +1,86 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
 <div class="container">
-    <div class="row my-5 d-flex align-items-center justify-content-center">
-        <div class="col-md-4 item-photo p-5">
-                <img style="width: 100%;" src="/media/{{product.image}}"  />
-        </div>
-        <div class="col-md-8" style="border:0px solid gray">
-            <h3>{{ product.name }}</h3>    
-            <small>{{ product.type }}</small>
-            <h6 class="my-3">Brand : <a class="text-decoration-none font-weight-normal" href="#">{{ product.brand }}</a> </h6>
-
-            <h3 class="text-primary">Rs. {{ product.price }}</h3>
-          
-                <div class="d-flex">
-                    <p class="text-dark">QUANTITY</p>
-                    <form action="{% url 'acf' %}" method="post">
-                        
-                        {% csrf_token %}
-                        <div class="container  my-2">
-                            <input type="button" onclick="decrementValue()" value="-" />
-                            <input  type="text"  name="qty" value="1" maxlength="2" max="10" size="1" id="number" />
-                            <input type="button" onclick="incrementValue()" value="+" />
-                        </div> 
-                </form>
-                </div>
-
-
-            <!-- Botones de compra -->
-            <div class="section my-4" >
-                <button class="btn btn-info text-light"><span aria-hidden="true"></span> BUY NOW</button>
-                <button class="btn btn-success"><span class="text-light" aria-hidden="true"></span> ADD TO CART</button>
-            </div>                                        
-        </div>                             	
+  <div class="row my-5 d-flex align-items-center justify-content-center">
+    <div class="col-md-4 item-photo p-5">
+      <img style="width: 100%" src="/media/{{product.image}}" />
     </div>
-    <div>
+    <div class="col-md-8" style="border: 0px solid gray">
+      <h3>{{ product.name }}</h3>
+      <small>{{ product.type }}</small>
+      <h6 class="my-3">
+        Brand :
+        <a class="text-decoration-none font-weight-normal" href="#"
+          >{{ product.brand }}</a
+        >
+      </h6>
 
-        <div class="col-12">
-            <h3 class="text-center">Comments</h3>
-  
-            {% for c in comments %}
-            <div class="card mb-3">
-              <div class="card-body">
-                <h5 class="card-title">{{ c.user }}</h5>
-                <p class="card-text">{{ c.comment }}</p>
-              </div>
-            </div>
-            {% endfor %}
-  
-            <form action="{% url 'comment' %}" method="post">
-              {% csrf_token %}
-              <div class="mb-3">
-                <input type="hidden" value="{{ product.id }}" name="pid">
-                <textarea name="comment" id="" cols="30" rows="10" class="form-control" required></textarea>
-              </div>
-  
-              <div class="mb-3">
-                <input type="submit" class="btn btn-success" value="Comment">
-              </div>
-            </form>
+      <h3 class="text-primary">Rs. {{ product.price }}</h3>
+      <p class="text-black">{{ product.details}}</p>
+
+      <div class="d-flex">
+        <p class="text-dark">QUANTITY</p>
+        <form action="{% url 'acf' %}" method="post">
+          {% csrf_token %}
+          <div class="container my-2">
+            <input type="button" onclick="decrementValue()" value="-" />
+            <input
+              type="text"
+              name="qty"
+              value="1"
+              maxlength="2"
+              max="10"
+              size="1"
+              id="number"
+            />
+            <input type="button" onclick="incrementValue()" value="+" />
           </div>
+        </form>
+      </div>
+
+      <!-- Botones de compra -->
+      <div class="section my-4">
+        <button class="btn btn-info text-light">
+          <span aria-hidden="true"></span> BUY NOW
+        </button>
+        <button class="btn btn-success">
+          <span class="text-light" aria-hidden="true"></span> ADD TO CART
+        </button>
+      </div>
     </div>
-</div>   
+  </div>
+  <div>
+    <div class="col-12">
+      <h3 class="text-center">Comments</h3>
+
+      {% for c in comments %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ c.user }}</h5>
+          <p class="card-text">{{ c.comment }}</p>
+        </div>
+      </div>
+      {% endfor %}
+
+      <form action="{% url 'comment' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <input type="hidden" value="{{ product.id }}" name="pid" />
+          <textarea
+            name="comment"
+            id=""
+            cols="30"
+            rows="10"
+            class="form-control"
+            required
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <input type="submit" class="btn btn-success" value="Comment" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}

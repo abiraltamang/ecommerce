@@ -1,63 +1,65 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <div class="col-12">
-    <h3 class="my-3 mb-5 text-center">Checkout</h3>
-    <div class="row">
-        <div class="col-md-6">
-            <form action="" method="post">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label for="id">Mobile</label>
-                    <input type="text" class="form-control" name="mobile">
-                </div>
-                <div class="mb-3">
-                    <label for="id">Address</label>
-                    <input type="text" class="form-control" name="address" >
-                </div>
+  <h3 class="my-3 mb-5 text-center">Checkout</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="id">Mobile</label>
+          <input type="text" class="form-control" name="mobile" />
+        </div>
+        <div class="mb-3">
+          <label for="id">Address</label>
+          <input type="text" class="form-control" name="address" />
+        </div>
 
-                <div class="mb-3">
-                    <input type="submit" class="btn btn-primary" value="ORDER" >
-                </div>
-            </form>
-            
+        <div class="mb-3">
+          <input type="submit" class="btn btn-primary" value="ORDER" />
         </div>
-        <div class="col-md-6 table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>S.N</th>
-                        <th>Products</th>
-                        <th>Prce</th>
-                        <th>Qty</th>
-                        <th>Amout</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for d in data %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{d.product}}</td>
-                        <td>{{d.price}}</td>
-                        <td>{{d.qty}}</td>
-                        <td>{{d.amount}}</td>
-                    </tr>
-                    {% endfor %}
-                    <tr>
-                        <td colspan="4">Total</td>
-                        <td>{{ total }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4">Delivery charge</td>
-                        <td>Nrs. 100</td>
-                    </tr>
-                </tbody>
-        </div>
-               
-           
-        </table>
+      </form>
     </div>
+    <div class="col-md-6 table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>S.N</th>
+            <th>Products</th>
+            <th>Prce</th>
+            <th>Qty</th>
+            <th>Amout</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for d in data %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{d.product}}</td>
+            <td>{{d.price}}</td>
+            <td>{{d.qty}}</td>
+            <td>{{d.amount}}</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="4">Total</td>
+            <td>{{ total }}</td>
+          </tr>
+          <tr>
+            <td colspan="4">Delivery charge</td>
+            <td>Nrs. 100</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="mb-3">
+        <input
+          type="submit"
+          class="btn btn-primary"
+          value="PROCEED TO PAYMENT"
+        />
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
