@@ -7,3 +7,5 @@ Product management: admin users can add, update, and delete products from the st
 Shopping cart: customers can add products to their cart and modify the quantity.
 Checkout: customers can place orders, enter their shipping and billing information, and review their order before submitting.
 Payment integration: the project includes integration with Stripe for accepting credit card payments.
+
+## How to Run ?
